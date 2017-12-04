@@ -14,10 +14,12 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 module.exports = {
   // Ouvre un connexion à la BDD
   openConnection: function() {
-    redisClient = redis.createClient({
-      host: host,
-      port: port
-    });
+    if (!redisClient) {
+      redisClient = redis.createClient({
+        host: host,
+        port: port
+      });
+    }
   },
 
   // Sauvegarde un objet en base
